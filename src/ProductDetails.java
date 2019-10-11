@@ -68,9 +68,10 @@ public class ProductDetails
             {
                 //if done correctly, this loop should only go through once,
                 // and s should contain the info recived from the query
-                itemReceivedFromSQL = result.getString(1);
 
-                i.UpdateProduct(itemReceivedFromSQL, connection); //let the object handle the updating
+//                itemReceivedFromSQL = result.getString(1);
+
+                i.UpdateProduct(result, connection); //let the object handle the updating
 
                 /*
                 String updateSQL;

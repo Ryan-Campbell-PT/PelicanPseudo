@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.Random;
 
 /**
@@ -40,5 +41,5 @@ public abstract class Product
      *                    in the database for that object
      * @param conn the connection needed to update the information for this object
      */
-    public abstract void UpdateProduct(String queryObject, Connection conn);
+    public abstract void UpdateProduct(ResultSet queryObject, Connection conn);
 }
