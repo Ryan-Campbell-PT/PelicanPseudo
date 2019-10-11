@@ -15,9 +15,9 @@ public class ProductDetails
     /**
      * this is the connection to the database that will be used throughout the class
      */
-    Connection connection;
+    private Connection connection;
 
-    ProductDetails()
+    private ProductDetails()
     {
         // https://docs.oracle.com/javase/tutorial/jdbc/basics/
         // sql database stuff
@@ -32,14 +32,34 @@ public class ProductDetails
     }
 
     /**
-     * checks the database for this item, and changes any parameters that have changed on it
+     * with the creation of an object, this function will be called to add it to the database,
      */
-    void UpdateItem(DisplayItem i)
+    static void AddProductToDatabase(Product p)
+    {
+        String sqlQuery = "INSERT INTO [table]";
+    }
+
+    /**
+     * this function will be used to add values to the database, for an object that is using
+     * parameters/information that isnt generic to Product (id, name, image)
+     * @param productId the productId that will be used to update the information
+     * @param parameterName what the name of the value will be in the database
+     * @param parameterValue the actual information for that value
+     */
+    static void AddParameter(int productId, String parameterName, Object parameterValue)
+    {
+
+    }
+
+    /**
+     * checks the database for this item, and changes any parameters that have changed on it
+     * @param i the object that has all the information, that now wants to be synced with the database
+     */
+    void UpdateItem(Product i)
     {
         try
         {
-            //reachout to database using this sql statment, not sure how its done atm
-            String getObjectSQL = "SELECT * WHERE id EQUALS " + i.id;
+            String getObjectSQL = "SELECT * WHERE id EQUALS " + i.getId();
             PreparedStatement p = connection.prepareStatement(getObjectSQL);
             ResultSet result = p.executeQuery();
 
@@ -50,12 +70,15 @@ public class ProductDetails
                 // and s should contain the info recived from the query
                 itemReceivedFromSQL = result.getString(1);
 
+                i.UpdateProduct(itemReceivedFromSQL, connection); //let the object handle the updating
+
+                /*
                 String updateSQL;
                 if (itemReceivedFromSQL.param1 != i.param1)
                     updateSQL = "UPDATE DisplayItem SET param1 = " + i.param1 + " WHERE id EQUALS " + i.id;
                 if (itemReceivedFromSQL.param2 != i.param2)
                     updateSQL = "UPDATE DisplayItem SET param2 = " + i.param2 + " WHERE id EQUALS " + i.id;
-                //... so on
+ */               //... so on
                 // these updates can probably be done in a more effecient way, but this is the general idea
             }
 
@@ -68,10 +91,10 @@ public class ProductDetails
     /**
      * assuming every DisplayItem has their own tag list, this will return it, in uses like tag searching
      */
-    ArrayList<String> ShowItemTags(DisplayItem i) throws SQLException
+    ArrayList<String> ShowItemTags(Product i) throws SQLException
     {
         //connect to database with this sql statement
-        String getObjectSQL = "SELECT * WHERE id EQUALS " + i.id;
+        String getObjectSQL = "SELECT * WHERE id EQUALS " + i.getId();
         PreparedStatement p = connection.prepareStatement(getObjectSQL);
         ResultSet result = p.executeQuery();
 
