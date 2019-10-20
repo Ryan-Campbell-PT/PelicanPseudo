@@ -14,10 +14,10 @@ public abstract class Product
     private int Id;
     public int getId() { return Id; }
 
-    private Image image; //since this is a website, it only makes sense that each product have an image
+    private Image image;
     protected void setImage(Image i) { this.image = i; }
 
-    public String name; //and every product will need a name
+    public String name;
 
     protected Product()
     {

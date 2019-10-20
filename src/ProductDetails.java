@@ -2,6 +2,7 @@ import com.sun.deploy.util.IconEncoder;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.sql.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -72,15 +73,6 @@ public class ProductDetails
 //                itemReceivedFromSQL = result.getString(1);
 
                 i.UpdateProduct(result, connection); //let the object handle the updating
-
-                /*
-                String updateSQL;
-                if (itemReceivedFromSQL.param1 != i.param1)
-                    updateSQL = "UPDATE DisplayItem SET param1 = " + i.param1 + " WHERE id EQUALS " + i.id;
-                if (itemReceivedFromSQL.param2 != i.param2)
-                    updateSQL = "UPDATE DisplayItem SET param2 = " + i.param2 + " WHERE id EQUALS " + i.id;
- */               //... so on
-                // these updates can probably be done in a more effecient way, but this is the general idea
             }
 
         } catch (SQLException e)
